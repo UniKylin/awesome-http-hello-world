@@ -34,8 +34,8 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
     http.HandleFunc("/", helloHandler)
-    println("Server running at http://localhost:8080/")
-    err := http.ListenAndServe(":8080", nil)
+    println("Server running at http://localhost:8000/")
+    err := http.ListenAndServe(":8000", nil)
     if err != nil {
         panic(err)
     }
@@ -51,7 +51,7 @@ const server = http.createServer((req, res) => {
   res.end('<h2>Hello Node...</h2>\n');
 });
 
-const PORT=3000
+const PORT=8000
 server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
