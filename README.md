@@ -56,3 +56,39 @@ server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
 ```
+
+## Java
+```java
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpExchange;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+
+public class SimpleHttpServer {
+	public static void main(String[] args) throws IOException {
+		HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+
+		server.createContext("/", exchange -> {
+			exchange.getResponseHeaders().set("Content-Type", "text/html");
+			String response = "<h2>Hi Java...</h2>\n";
+			exchange.sendResponseHeaders(200, response.getBytes().length);
+			try (OutputStream os = exchange.getResponseBody()) {
+				os.write(response.getBytes());
+			}
+		});
+
+		server.start();
+		System.out.println("Server running at http://localhost:8000/");
+	}
+}
+```
+编译启动
+```shell
+javac SimpleHttpServer.java
+
+java SimpleHttpServer
+```
+
