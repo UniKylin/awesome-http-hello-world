@@ -1,5 +1,24 @@
 # Hello World
 
+## Python 
+```python
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+class HelloHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        self.wfile.write(b"<h2>>>> Hello Python...</h2>\n")
+
+host = 'localhost'
+port = 8000
+server = HTTPServer((host, port), HelloHandler)
+
+print(f">>> Server running at http://{host}:{port}")
+server.serve_forever()
+```
+
 ## Go
 ```go
 package main
